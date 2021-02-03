@@ -180,6 +180,20 @@
     <DefineConstants>TRACE</DefineConstants>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <ItemGroup Condition="'$(Platform)' == 'x64'">
+    <Reference Include="Interop.NETWORKLIST, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>DLLS\x64\Interop.NETWORKLIST.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Platform)' == 'x86'">
+    <Reference Include="Interop.NETWORKLIST, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>DLLS\x86\Interop.NETWORKLIST.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="AForge, Version=2.2.3.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -236,9 +250,14 @@
       <HintPath>DLLS\Interop.NetFwTypeLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="LibVLCSharp, Version=3.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\LibVLCSharp.3.4.5\lib\net40\LibVLCSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LibVLCSharp.WinForms, Version=3.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\LibVLCSharp.WinForms.3.4.5\lib\net40\LibVLCSharp.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -271,10 +290,6 @@
     <Reference Include="NSpeex">
       <HintPath>DLLS\NSpeex.dll</HintPath>
     </Reference>
-    <Reference Include="nVLC, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\nVLC.3.0.0\lib\net40\nVLC.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Renci.SshNet">
       <HintPath>DLLS\Renci.SshNet.dll</HintPath>
     </Reference>
@@ -295,6 +310,7 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data">
       <Name>System.Data</Name>
@@ -304,6 +320,8 @@
       <Name>System.Drawing</Name>
     </Reference>
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -321,6 +339,10 @@
     <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.ServiceModel.Discovery" />
     <Reference Include="System.Speech" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
@@ -338,16 +360,6 @@
     <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)packages\Zlib.Portable.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Interop.NETWORKLIST, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" Condition="'$(Platform)' == 'x64'">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>DLLS\x64\Interop.NETWORKLIST.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.NETWORKLIST, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" Condition="'$(Platform)' == 'x86'">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>DLLS\x86\Interop.NETWORKLIST.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +478,12 @@
     <Compile Include="Onvif\ONVIFDevice.cs" />
     <Compile Include="Onvif\Security\DigestSecurityHeader.cs" />
     <Compile Include="Onvif\Security\SecurityToken.cs" />
+    <Compile Include="PlayerVLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerVLC.Designer.cs">
+      <DependentUpon>PlayerVLC.cs</DependentUpon>
+    </Compile>
     <Compile Include="PTZConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -892,12 +910,6 @@
     </Compile>
     <Compile Include="Pelco\PelcoConfig.Designer.cs">
       <DependentUpon>PelcoConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerVLC.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlayerVLC.Designer.cs">
-      <DependentUpon>PlayerVLC.cs</DependentUpon>
     </Compile>
     <Compile Include="Prompt.cs">
       <SubType>Form</SubType>
@@ -2337,9 +2349,6 @@
     <None Include="System.Xml.XmlElement.datasource" />
     <None Include="Web References\iSpyWS\ispysecure.disco" />
     <Content Include="Supporting\iSpyMonitor.exe" />
-    <Content Include="VLC\readme.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="WebServerRoot\notfound.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2947,8 +2956,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\x86\" />
-    <Folder Include="DLLS\x64\" />
-    <Folder Include="DLLS\x86\" />
     <Folder Include="WebServerRoot\Media\Audio\" />
     <Folder Include="WebServerRoot\Media\Video\" />
   </ItemGroup>
@@ -2964,7 +2971,9 @@
     </PreBuildEvent>
     <PostBuildEvent>xcopy "$(ProjectDir)dlls\$(PlatformName)\*.*" "$(ProjectDir)$(OutDir)" /Y
 if "$(ConfigurationName)" == "Release" (
-    call "$(SolutionDir)signing\iSpy.bat"
+    del $(ProjectDir)$(OutDir)*.pdb"
+    del "$(ProjectDir)$(OutDir)*.vshost.exe"
+    call "$(SolutionDir)signing\iSpy$(PlatformName).bat"
 )</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('packages\SharpDX.2.6.3\build\SharpDX.targets')" />
